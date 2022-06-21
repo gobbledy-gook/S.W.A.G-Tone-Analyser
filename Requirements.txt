@@ -1,2 +1,2 @@
 streamlit
-ibm-watson
+ibm_watson
