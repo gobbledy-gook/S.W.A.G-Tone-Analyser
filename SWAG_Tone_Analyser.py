@@ -4,13 +4,13 @@ from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson.natural_language_understanding_v1 \
     import Features, CategoriesOptions, EmotionOptions, KeywordsOptions, EntitiesOptions
 
-authenticator = IAMAuthenticator('Uj0kpwPhaj99JT04MYpaAtOuOlLc4YoOMMNRu3hMS1Sc')
+authenticator = IAMAuthenticator(api)
 natural_language_understanding = NaturalLanguageUnderstandingV1(
     version='2022-04-07',
     authenticator=authenticator
 )
 
-natural_language_understanding.set_service_url('https://api.eu-gb.natural-language-understanding.watson.cloud.ibm.com/instances/92e976f2-fad7-44b1-b54e-b225c7079bac')
+natural_language_understanding.set_service_url(url)
 
 
 def getEmotions(data):
