@@ -4,14 +4,13 @@ from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson.natural_language_understanding_v1 \
     import Features, CategoriesOptions, EmotionOptions, KeywordsOptions, EntitiesOptions
 
-authenticator = IAMAuthenticator(API)
+authenticator = IAMAuthenticator(st.secrets["API"])
 natural_language_understanding = NaturalLanguageUnderstandingV1(
     version='2022-04-07',
     authenticator=authenticator
 )
 
-natural_language_understanding.set_service_url(url)
-
+natural_language_understanding.set_service_url(st.secrets["URL"])
 
 def getEmotions(data):
     emotions = []
@@ -57,11 +56,6 @@ def getKeywords(data):
         
     return Keywords, Sentiments, score/(len(Keywords))
 
-authenticator = IAMAuthenticator(API)
-natural_language_understanding = NaturalLanguageUnderstandingV1(
-    version='2022-04-07',
-    authenticator=authenticator
-)
 
 st.header("S.W.A.G Tone Analyser")
 
@@ -96,12 +90,12 @@ if st.button('Analyse'):
             if emo_dict['disgust'] > '0.2' and emo_dict['anger'] > '0.05':
                 col6.write('HATEFUL')
             elif emo_dict['anger'] > '0.1':
-                col6.write('HATEFUL')  
+                col6.write('HATEFUL') 
     elif emo_dict['disgust'] > '0.17' and emo_dict['anger'] > '0.05':
         col6.write('HATEFUL')
     elif max_emotion == 'sadness' and emo_dict['anger'] > '0.1':
             col6.write('HATEFUL')
     else:
-        col6.write('NOT HATEFUL')            
+        col6.write('NOT HATEFUL')    
 
 
