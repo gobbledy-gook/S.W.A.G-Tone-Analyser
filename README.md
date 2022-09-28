@@ -1,6 +1,6 @@
 #### S.W.A.G-Tone-Analyser
 
-Link to the web-app - https://gobbledy-gook-s-w-a-g-tone-analyser-swag-tone-analyser-658l3l.streamlitapp.com/
+Link to the web-app - ```https://gobbledy-gook-s-w-a-g-tone-analyser-swag-tone-analyser-658l3l.streamlitapp.com/```
 
 ## This web app analyses the text and results in various important data that can help in identifying if the text is hateful or not. The user have to just give the text as input and click on the ```Analyse``` button.
 
