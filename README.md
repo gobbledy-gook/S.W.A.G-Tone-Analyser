@@ -1,6 +1,6 @@
 # S.W.A.G-Tone-Analyser
 
-Link to the web-app - ```https://gobbledy-gook-s-w-a-g-tone-analyser-swag-tone-analyser-658l3l.streamlitapp.com/```
+Link to the web-app - [S.W.A.G - Tone Analyser](https://gobbledy-gook-s-w-a-g-tone-analyser-swag-tone-analyser-658l3l.streamlitapp.com/)
 
 This web app analyses the text and results in various important data that can help in identifying if the text is **Hateful** or not. The user have to just give the text as input and click on the `Analyse` button. The web-app connects with the IBM-Watson API and fetches all the important functions and methods to give the desired results.
 
