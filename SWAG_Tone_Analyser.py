@@ -12,6 +12,7 @@ natural_language_understanding = NaturalLanguageUnderstandingV1(
 
 natural_language_understanding.set_service_url(st.secrets["URL"])
 
+
 def getEmotions(data):
     emotions = []
     emotions_dict = {}
@@ -31,9 +32,7 @@ def getEmotions(data):
     emotions_scores.sort()
 
     for e in emotions:
-        print(e)
         if emotions_scores[-1] == e[1]:
-            print('Check')
             max_emo = e[0]    
 
     return emotions, max_emo, emotions_dict    
@@ -47,7 +46,6 @@ def getKeywords(data):
                     features=Features(keywords=KeywordsOptions(sentiment=True, limit=10))).get_result()
 
     i = 0
-    print('\n')
     while i < len(response_keyw['keywords']):
         Keywords.append(response_keyw['keywords'][i]['text'])
         Sentiments.append(response_keyw['keywords'][i]['sentiment']['label'])
@@ -65,11 +63,17 @@ if st.button('Analyse'):
     emotionsList, max_emotion, emo_dict = getEmotions(data)
     st.success('Your text is analysed!')
     col1, col2, col3, col4, col5, col6 = st.columns(6)
-        
+    
+    for i in range(len(emotionsList)):
+        a = emotionsList[i][0]
+        emotionsList[i][0] = emotionsList[i][1]
+        emotionsList[i][1] = a        
+    
+    emotionsList.sort(reverse=True)
+
     for i in emotionsList:
-        col1.write(i[0])
-        col2.write(i[1])
-    print(emotionsList)
+        col1.write(i[1])
+        col2.write(i[0])
 
     keywords, sentiments, score = getKeywords(data)
     for i in keywords:
@@ -78,6 +82,7 @@ if st.button('Analyse'):
         col4.write(j)
     col5.write('Sentiment Score')
     col5.write(score)
+
 
     if score < -0.7:
         if max_emotion == 'joy' or emo_dict['joy'] > '0.55':
@@ -96,6 +101,6 @@ if st.button('Analyse'):
     elif max_emotion == 'sadness' and emo_dict['anger'] > '0.1':
             col6.write('HATEFUL')
     else:
-        col6.write('NOT HATEFUL')    
+        col6.write('NOT HATEFUL')
 
 
