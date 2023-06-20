@@ -75,32 +75,38 @@ if st.button('Analyse'):
         col1.write(i[1])
         col2.write(i[0])
 
-    keywords, sentiments, score = getKeywords(data)
-    for i in keywords:
-        col3.write(i)
-    for j in sentiments:    
-        col4.write(j)
-    col5.write('Sentiment Score')
-    col5.write(score)
-
-
-    if score < -0.7:
-        if max_emotion == 'joy' or emo_dict['joy'] > '0.55':
-            col6.write('NOT HATEFUL')    
-        elif max_emotion == 'anger' and emo_dict['fear'] > '0.05' and emo_dict['disgust'] > '0.05':
-            col6.write('HATEFUL & Inflammatory')
-        elif max_emotion == 'sadness' and emo_dict['anger'] > '0.1':
-            col6.write('HATEFUL')
-        elif max_emotion == 'disgust':
-            if emo_dict['disgust'] > '0.2' and emo_dict['anger'] > '0.05':
-                col6.write('HATEFUL')
-            elif emo_dict['anger'] > '0.1':
-                col6.write('HATEFUL') 
-    elif emo_dict['disgust'] > '0.17' and emo_dict['anger'] > '0.05':
-        col6.write('HATEFUL')
-    elif max_emotion == 'sadness' and emo_dict['anger'] > '0.1':
-            col6.write('HATEFUL')
+    try:
+        keywords, sentiments, score = getKeywords(data)
+    except:
+        print("--- App crashed ---")
+        print(" data: {}".format(data))
+        print("---- Crash report end ----")
     else:
-        col6.write('NOT HATEFUL')
+        for i in keywords:
+            col3.write(i)
+        for j in sentiments:    
+            col4.write(j)
+        col5.write('Sentiment Score')
+        col5.write(score)
+
+
+        if score < -0.7:
+            if max_emotion == 'joy' or emo_dict['joy'] > '0.55':
+                col6.write('NOT HATEFUL')    
+            elif max_emotion == 'anger' and emo_dict['fear'] > '0.05' and emo_dict['disgust'] > '0.05':
+                col6.write('HATEFUL & Inflammatory')
+            elif max_emotion == 'sadness' and emo_dict['anger'] > '0.1':
+                col6.write('HATEFUL')
+            elif max_emotion == 'disgust':
+                if emo_dict['disgust'] > '0.2' and emo_dict['anger'] > '0.05':
+                    col6.write('HATEFUL')
+                elif emo_dict['anger'] > '0.1':
+                    col6.write('HATEFUL') 
+        elif emo_dict['disgust'] > '0.17' and emo_dict['anger'] > '0.05':
+            col6.write('HATEFUL')
+        elif max_emotion == 'sadness' and emo_dict['anger'] > '0.1':
+                col6.write('HATEFUL')
+        else:
+            col6.write('NOT HATEFUL')
 
 
